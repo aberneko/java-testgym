@@ -34,13 +34,15 @@ public class Timetable {
         //сохраняем занятие в расписании
     }
 
+    //сложность должна быть О(1)
     public List<TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
         return sessionsByDay.getOrDefault(dayOfWeek, Collections.emptyList());
-        //как реализовать, тоже непонятно, но сложность должна быть О(1)
     }
 
-//    public непонятно, что возвращать getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
-//        //как реализовать, тоже непонятно, но сложность должна быть О(1)
-//    }
+    //сложность должна быть О(1)
+    public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
+        var daySchedule = timetable.get(dayOfWeek);
+        return (timetable.get(dayOfWeek) == null) ? Collections.emptyList() : daySchedule.getOrDefault(timeOfDay, Collections.emptyList());
+    }
 
 }
