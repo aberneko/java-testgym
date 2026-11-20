@@ -24,7 +24,13 @@ public class Timetable {
         }
 
         trainingSessionList.add(trainingSession);
-        sessionsByDay.put(dayOfWeek, trainingSessionList);
+
+        List<TrainingSession> allSessionsForDay = new ArrayList<>();
+        for (List<TrainingSession> list : timeList.values()) {
+            allSessionsForDay.addAll(list);
+        }
+
+        sessionsByDay.put(dayOfWeek, allSessionsForDay);
         //сохраняем занятие в расписании
     }
 
