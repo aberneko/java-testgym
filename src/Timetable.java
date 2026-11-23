@@ -45,4 +45,21 @@ public class Timetable {
         return (timetable.get(dayOfWeek) == null) ? Collections.emptyList() : daySchedule.getOrDefault(timeOfDay, Collections.emptyList());
     }
 
+    public Map<Coach, Integer> getCountByCoaches() {
+        Map<Coach, Integer> coachCountMap = new HashMap<>();
+
+        for (DayOfWeek day : DayOfWeek.values()) {
+            List<TrainingSession> listCoach = getTrainingSessionsForDay(day);
+
+            for (TrainingSession trainingSession : listCoach) {
+                Coach coach = trainingSession.getCoach();
+
+                int currentCount = coachCountMap.getOrDefault(coach, 0);
+                coachCountMap.put(coach, currentCount + 1);
+            }
+        }
+
+        return coachCountMap;
+    }
+
 }
