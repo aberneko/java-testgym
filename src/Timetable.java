@@ -31,7 +31,6 @@ public class Timetable {
         }
 
         sessionsByDay.put(dayOfWeek, allSessionsForDay);
-        //сохраняем занятие в расписании
     }
 
     //сложность должна быть О(1)
@@ -45,7 +44,7 @@ public class Timetable {
         return (timetable.get(dayOfWeek) == null) ? Collections.emptyList() : daySchedule.getOrDefault(timeOfDay, Collections.emptyList());
     }
 
-    public Map<Coach, Integer> getCountByCoaches() {
+    public List<Map.Entry<Coach, Integer>> getCountByCoaches() {
         Map<Coach, Integer> coachCountMap = new HashMap<>();
 
         for (DayOfWeek day : DayOfWeek.values()) {
@@ -59,7 +58,10 @@ public class Timetable {
             }
         }
 
-        return coachCountMap;
+        List<Map.Entry<Coach, Integer>> list = new ArrayList<>(coachCountMap.entrySet());
+        list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        return list;
     }
 
 }

@@ -14,8 +14,6 @@ public class TimetableTest {
         TrainingSession singleTrainingSession = new TrainingSession(group, coach,
                 DayOfWeek.MONDAY, new TimeOfDay(13, 0));
 
-
-
         timetable.addNewTrainingSession(singleTrainingSession);
 
         //Проверить, что за понедельник вернулось одно занятие
@@ -109,7 +107,7 @@ public class TimetableTest {
     }
 
     @Test
-    void testMapCoachCountTrainingSessionWeek() {
+    void testMapCoachCountTrainingSessionWeek1() {
         Timetable timetable = new Timetable();
 
         Group group = new Group("Акробатика для детей", Age.CHILD, 60);
@@ -162,13 +160,18 @@ public class TimetableTest {
         timetable.addNewTrainingSession(singleTrainingSession8);
         timetable.addNewTrainingSession(singleTrainingSession9);
 
-        Map<Coach, Integer> mapCount = timetable.getCountByCoaches();
-        Integer coachTwo = mapCount.get(coach3);
+        List<Map.Entry<Coach, Integer>> mapCount = timetable.getCountByCoaches();
 
-        Assertions.assertEquals(3, coachTwo);
-
+        Assertions.assertEquals(3, mapCount.get(0).getValue());
+        Assertions.assertEquals(2, mapCount.get(1).getValue());
+        Assertions.assertEquals(2, mapCount.get(2).getValue());
+        Assertions.assertEquals(2, mapCount.get(3).getValue());
+        Assertions.assertEquals(1, mapCount.get(4).getValue());
 
     }
+
+
+
 
 
 }
